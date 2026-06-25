@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────
+   ETTAAROUF TOURISME — Styles globaux
+   Palette : Lapis · Or Antique · Ivoire · Sable
+───────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  }
+
+  body {
+    @apply bg-white text-charcoal font-body antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Typographie hiérarchique */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  p {
+    @apply font-body;
+    text-wrap: pretty;
+  }
+
+  /* Focus visible accessible */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold ring-offset-2;
+  }
+
+  /* Sélection de texte */
+  ::selection {
+    background-color: theme('colors.gold.DEFAULT');
+    color: white;
+  }
+}
+
+@layer components {
+  /* Conteneur central */
+  .container-site {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section spacing */
+  .section-py {
+    @apply py-20 lg:py-28;
+  }
+
+  /* En-tête de section réutilisable */
+  .section-eyebrow {
+    @apply flex items-center gap-3 mb-3;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: '';
+    @apply h-px w-8 bg-gold flex-shrink-0;
+  }
+
+  /* Carte de base */
+  .card-base {
+    @apply bg-white rounded-3xl shadow-card border border-ivory-200
+           transition-all duration-400 ease-luxury;
+  }
+  .card-base:hover {
+    @apply shadow-card-lg -translate-y-1.5;
+  }
+
+  /* Bouton primaire */
+  .btn-primary {
+    @apply bg-gold hover:bg-gold-dark text-white font-body font-semibold
+           px-7 py-3.5 rounded-full shadow-gold text-base
+           transition-all duration-300 ease-luxury
+           hover:shadow-none hover:-translate-y-0.5;
+  }
+
+  /* Bouton outline */
+  .btn-outline-white {
+    @apply border-2 border-white/60 hover:border-white text-white
+           font-body font-semibold px-7 py-3.5 rounded-full text-base
+           backdrop-blur-sm hover:bg-white/10
+           transition-all duration-300 ease-luxury;
+  }
+
+  /* Glass morphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .glass-dark {
+    background: rgba(12, 30, 63, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Badge */
+  .badge-gold {
+    @apply bg-gold/15 text-gold-dark border border-gold/30
+           font-body text-[10px] font-semibold
+           px-2.5 py-1 rounded-full uppercase tracking-wider;
+  }
+
+  /* Ligne décorative dorée */
+  .gold-rule {
+    @apply h-px bg-gradient-gold;
+  }
+}
+
+@layer utilities {
+  /* Préserve le rapport d'aspect */
+  .aspect-card { aspect-ratio: 4/3; }
+  .aspect-hero { aspect-ratio: 16/9; }
+
+  /* Text gradient doré */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #C8A45A 0%, #E5C97B 50%, #C8A45A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Truncate multi-lignes */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Motion réduit — respecte les préférences utilisateur */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ── Scrollbar personnalisée ──────────────────────────── */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: theme('colors.ivory.100');
+}
+::-webkit-scrollbar-thumb {
+  background: theme('colors.gold.DEFAULT');
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.gold.dark');
+}
+
+/* ── Animations personnalisées ────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes kenBurns {
+  from { transform: scale(1)     translateX(0)   translateY(0); }
+  to   { transform: scale(1.06)  translateX(-1%) translateY(-1%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
