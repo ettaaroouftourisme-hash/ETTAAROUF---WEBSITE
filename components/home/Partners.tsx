@@ -38,8 +38,10 @@ export default function Partners({ partners }: Props) {
                            bg-gradient-to-l from-ivory-100 to-transparent pointer-events-none" />
 
           {/* Double liste pour boucle infinie */}
-          <div className="flex items-center gap-10 lg:gap-16 w-max animate-[scroll_30s_linear_infinite]"
-               style={{ '--tw-translate-x': '0' } as React.CSSProperties}>
+          <div
+            className="flex items-center gap-10 lg:gap-16 w-max"
+            style={{ animation: 'partners-scroll 30s linear infinite' }}
+          >
             {[...names, ...names].map((name, i) => (
               <div
                 key={i}
@@ -73,13 +75,6 @@ export default function Partners({ partners }: Props) {
         </div>
       </div>
 
-      {/* CSS animation inline pour le défilement */}
-      <style jsx>{`
-        @keyframes scroll {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
-      `}</style>
     </section>
   )
 }
