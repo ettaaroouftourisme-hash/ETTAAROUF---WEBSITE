@@ -40,35 +40,45 @@ export default function Footer() {
 
           {/* ── Colonne 1 : Identité ───────────────────── */}
           <div className="lg:col-span-1">
-            {/* Logo */}
-            <div className="mb-5">
-              <div className="font-display text-2xl font-semibold tracking-widest uppercase text-white">
-                Ettaarouf
-              </div>
-              <div className="font-body text-gold text-[10px] tracking-[0.25em] uppercase mt-0.5">
-                Tourisme &amp; Voyage
+            {/* Logo avec SVG */}
+            <div className="flex items-center gap-3 mb-5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo-ettaarouf.svg"
+                alt="Ettaarouf Tourisme"
+                width={52}
+                height={52}
+                className="rounded-full opacity-95"
+              />
+              <div>
+                <div className="font-display text-xl font-semibold tracking-widest uppercase text-white">
+                  Ettaarouf
+                </div>
+                <div className="font-body text-gold text-[9px] tracking-[0.25em] uppercase mt-0.5">
+                  Tourisme &amp; Voyage
+                </div>
               </div>
             </div>
-            <p className="font-body text-white/60 text-sm leading-relaxed mb-6 max-w-xs">
+
+            <p className="font-body text-white/58 text-sm leading-relaxed mb-6 max-w-xs">
               Votre partenaire de confiance pour des voyages mémorables depuis plus de 15 ans.
               Experts en Omra, circuits internationaux et séjours sur mesure.
             </p>
 
             {/* Réseaux sociaux */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               {[
-                { Icon: Facebook,  href: '#', label: 'Facebook' },
-                { Icon: Instagram, href: '#', label: 'Instagram' },
-                { Icon: Youtube,   href: '#', label: 'YouTube' },
-              ].map(({ Icon, href, label }) => (
+                { Icon: Facebook,  href: '#', label: 'Facebook',  color: 'hover:bg-[#1877F2] hover:border-[#1877F2]' },
+                { Icon: Instagram, href: '#', label: 'Instagram', color: 'hover:bg-gradient-to-br hover:from-purple-500 hover:to-amber hover:border-transparent' },
+                { Icon: Youtube,   href: '#', label: 'YouTube',   color: 'hover:bg-[#FF0000] hover:border-[#FF0000]' },
+              ].map(({ Icon, href, label, color }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-full border border-white/20
-                              flex items-center justify-center text-white/60
-                              hover:text-gold hover:border-gold
-                              transition-all duration-200"
+                  className={`w-9 h-9 rounded-full border border-white/20
+                              flex items-center justify-center text-white/60 hover:text-white
+                              transition-all duration-300 ${color}`}
                 >
                   <Icon className="h-4 w-4" />
                 </a>

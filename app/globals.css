@@ -54,19 +54,17 @@
 }
 
 @layer components {
-  /* Conteneur central */
+  /* ── Conteneur & Layout ──────────────────────── */
   .container-site {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-
-  /* Section spacing */
   .section-py {
     @apply py-20 lg:py-28;
   }
 
-  /* En-tête de section réutilisable */
+  /* ── En-tête de section ──────────────────────── */
   .section-eyebrow {
-    @apply flex items-center gap-3 mb-3;
+    @apply inline-flex items-center gap-3 mb-3;
   }
   .section-eyebrow::before,
   .section-eyebrow::after {
@@ -74,56 +72,176 @@
     @apply h-px w-8 bg-gold flex-shrink-0;
   }
 
-  /* Carte de base */
+  /* ── Cartes ──────────────────────────────────── */
   .card-base {
     @apply bg-white rounded-3xl shadow-card border border-ivory-200
-           transition-all duration-400 ease-luxury;
+           transition-all duration-500 ease-luxury;
   }
   .card-base:hover {
-    @apply shadow-card-lg -translate-y-1.5;
+    @apply shadow-card-hover -translate-y-2 border-gold/20;
   }
 
-  /* Bouton primaire */
+  /* Carte avec shine au survol */
+  .card-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .card-shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(229,201,123,0.12) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .card-shine:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* ── Boutons ─────────────────────────────────── */
   .btn-primary {
-    @apply bg-gold hover:bg-gold-dark text-white font-body font-semibold
+    @apply inline-flex items-center justify-center gap-2
+           bg-gold hover:bg-gold-dark text-white font-body font-semibold
            px-7 py-3.5 rounded-full shadow-gold text-base
            transition-all duration-300 ease-luxury
-           hover:shadow-none hover:-translate-y-0.5;
+           hover:shadow-gold-lg hover:-translate-y-0.5;
   }
-
-  /* Bouton outline */
+  .btn-primary-amber {
+    @apply inline-flex items-center justify-center gap-2
+           bg-amber hover:bg-amber-dark text-white font-body font-semibold
+           px-7 py-3.5 rounded-full shadow-amber text-base
+           transition-all duration-300 ease-luxury
+           hover:-translate-y-0.5;
+  }
   .btn-outline-white {
-    @apply border-2 border-white/60 hover:border-white text-white
+    @apply inline-flex items-center justify-center gap-2
+           border-2 border-white/60 hover:border-white text-white
            font-body font-semibold px-7 py-3.5 rounded-full text-base
            backdrop-blur-sm hover:bg-white/10
            transition-all duration-300 ease-luxury;
   }
+  .btn-outline-lapis {
+    @apply inline-flex items-center justify-center gap-2
+           border-2 border-lapis-800 hover:bg-lapis-800 text-lapis-800 hover:text-white
+           font-body font-semibold px-7 py-3.5 rounded-full text-base
+           transition-all duration-300 ease-luxury;
+  }
 
-  /* Glass morphism */
+  /* ── Glass Morphism ──────────────────────────── */
   .glass {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
-
   .glass-dark {
     background: rgba(12, 30, 63, 0.55);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
-
-  /* Badge */
-  .badge-gold {
-    @apply bg-gold/15 text-gold-dark border border-gold/30
-           font-body text-[10px] font-semibold
-           px-2.5 py-1 rounded-full uppercase tracking-wider;
+  .glass-gold {
+    background: rgba(200, 164, 90, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(200, 164, 90, 0.25);
   }
 
-  /* Ligne décorative dorée */
-  .gold-rule {
-    @apply h-px bg-gradient-gold;
+  /* ── Badges ──────────────────────────────────── */
+  .badge-gold {
+    @apply bg-gold/12 text-gold-dark border border-gold/35
+           font-body text-[10px] font-semibold
+           px-3 py-1 rounded-full uppercase tracking-widest;
+  }
+  .badge-amber {
+    @apply bg-amber/12 text-amber-dark border border-amber/30
+           font-body text-[10px] font-semibold
+           px-3 py-1 rounded-full uppercase tracking-widest;
+  }
+  .badge-emerald {
+    @apply bg-emerald/10 text-emerald-dark border border-emerald/25
+           font-body text-[10px] font-semibold
+           px-3 py-1 rounded-full uppercase tracking-widest;
+  }
+  .badge-lapis {
+    @apply bg-lapis-800/10 text-lapis-800 border border-lapis-800/20
+           font-body text-[10px] font-semibold
+           px-3 py-1 rounded-full uppercase tracking-widest;
+  }
+
+  /* ── Lignes décoratives ──────────────────────── */
+  .gold-rule     { @apply h-px bg-gradient-gold; }
+  .amber-rule    { @apply h-px bg-gradient-amber; }
+  .divider-fancy {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #C8A45A, transparent);
+  }
+  .divider-fancy::after {
+    content: '✦';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    @apply bg-white text-gold text-xs px-2;
+  }
+
+  /* ── Icône accent soleil (du logo) ──────────── */
+  .icon-sun-bg {
+    @apply w-12 h-12 rounded-2xl flex items-center justify-center
+           bg-gradient-to-br from-amber-light/20 to-amber/10
+           border border-amber/25 transition-all duration-300;
+  }
+  .icon-sun-bg:hover,
+  .group:hover .icon-sun-bg {
+    @apply bg-amber border-amber;
+  }
+  .icon-lapis-bg {
+    @apply w-12 h-12 rounded-2xl flex items-center justify-center
+           bg-lapis-50 border border-lapis-100 transition-all duration-300;
+  }
+
+  /* ── Texte gradient ──────────────────────────── */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #A8852B 0%, #C8A45A 40%, #E5C97B 70%, #C8A45A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-amber {
+    background: linear-gradient(135deg, #E06000 0%, #FF8C00 50%, #FFB347 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-lapis {
+    background: linear-gradient(135deg, #0C1E3F 0%, #1E4D8C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-shimmer {
+    background: linear-gradient(90deg, #A8852B 0%, #E5C97B 25%, #C8A45A 50%, #E5C97B 75%, #A8852B 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerGold 3s ease-in-out infinite;
+  }
+
+  /* ── Section fond décoratif soleil ──────────── */
+  .sun-glow-bg {
+    position: relative;
+  }
+  .sun-glow-bg::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,140,0,0.08) 0%, transparent 70%);
+    pointer-events: none;
   }
 }
 
