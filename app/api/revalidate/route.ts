@@ -2,6 +2,11 @@
  * Webhook de revalidation Hygraph → Netlify ISR
  * POST /api/revalidate
  */
+
+// Force l'exécution dynamique — empêche Next.js d'analyser cette route
+// statiquement au build (ce qui provoquerait des erreurs sans variables CMS).
+export const dynamic = 'force-dynamic'
+
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { verifyWebhookSignature } from '@/lib/hygraph'

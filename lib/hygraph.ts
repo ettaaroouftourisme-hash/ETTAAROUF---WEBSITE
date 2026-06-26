@@ -12,12 +12,11 @@
 import { GraphQLClient } from 'graphql-request'
 
 // ── Configuration ─────────────────────────────────────────────
-const HYGRAPH_ENDPOINT = process.env.HYGRAPH_ENDPOINT!
-const HYGRAPH_TOKEN    = process.env.HYGRAPH_TOKEN!
-
-if (!HYGRAPH_ENDPOINT && process.env.NODE_ENV === 'production') {
-  throw new Error('[Hygraph] HYGRAPH_ENDPOINT manquant dans les variables d\'environnement')
-}
+// Ne jamais lancer une erreur au niveau module — Next.js analyse les routes
+// au build-time même sans variables d'environnement configurées.
+// La validation se fait à l'intérieur de hygraphFetch() à l'exécution.
+const HYGRAPH_ENDPOINT = process.env.HYGRAPH_ENDPOINT ?? ''
+const HYGRAPH_TOKEN    = process.env.HYGRAPH_TOKEN    ?? ''
 
 // ── Client publié (PUBLISHED) ─────────────────────────────────
 export const hygraphClient = HYGRAPH_ENDPOINT
