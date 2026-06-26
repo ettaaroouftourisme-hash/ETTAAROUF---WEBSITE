@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu, X, Phone, ChevronDown, Globe } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -68,20 +69,32 @@ export default function Header() {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-luxury',
         scrolled
           ? 'bg-lapis-800/97 backdrop-blur-md shadow-lg py-3'
-          : 'bg-transparent py-5'
+          : 'bg-gradient-to-b from-black/55 via-black/25 to-transparent py-5'
       )}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
 
             {/* ── Logo ─────────────────────────────────────────── */}
-            <Link href="/" className="flex flex-col group">
-              <span className="font-display text-white text-xl font-semibold tracking-widest uppercase
-                               transition-opacity duration-200 group-hover:opacity-80">
-                Ettaarouf
-              </span>
-              <span className="font-body text-gold text-[10px] tracking-[0.25em] uppercase -mt-0.5">
-                Tourisme &amp; Voyage
-              </span>
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <Image
+                src="/logo-ettaarouf.svg"
+                alt="Ettaarouf Tourisme et Voyages"
+                width={48}
+                height={48}
+                className="rounded-full transition-transform duration-300 group-hover:scale-105 drop-shadow-md"
+                priority
+              />
+              <div className="flex flex-col">
+                <span className="font-display text-white text-lg font-semibold tracking-widest uppercase
+                                 transition-opacity duration-200 group-hover:opacity-80
+                                 [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]">
+                  Ettaarouf
+                </span>
+                <span className="font-body text-gold text-[9px] tracking-[0.22em] uppercase -mt-0.5
+                                 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
+                  Tourisme &amp; Voyage
+                </span>
+              </div>
             </Link>
 
             {/* ── Navigation desktop ───────────────────────────── */}
@@ -97,8 +110,9 @@ export default function Header() {
                     href={link.href}
                     className={cn(
                       'flex items-center gap-1 px-3 py-2 rounded-lg',
-                      'font-body text-sm text-white/85 hover:text-white',
+                      'font-body text-sm text-white hover:text-white',
                       'transition-all duration-200 hover:bg-white/10',
+                      '[text-shadow:0_1px_4px_rgba(0,0,0,0.6)]',
                       activeMenu === link.label && 'bg-white/10 text-white'
                     )}
                   >
