@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Menu, X, Phone, ChevronDown, Globe } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -68,30 +67,36 @@ export default function Header() {
       <header className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-luxury',
         scrolled
-          ? 'bg-lapis-800/97 backdrop-blur-md shadow-lg py-3'
-          : 'bg-gradient-to-b from-black/55 via-black/25 to-transparent py-5'
+          ? 'bg-white/96 backdrop-blur-md shadow-md py-3'
+          : 'bg-gradient-to-b from-black/65 via-black/35 to-transparent py-5'
       )}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
 
             {/* ── Logo ─────────────────────────────────────────── */}
             <Link href="/" className="flex items-center gap-2.5 group">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/logo-ettaarouf.svg"
                 alt="Ettaarouf Tourisme et Voyages"
-                width={48}
-                height={48}
+                width={44}
+                height={44}
                 className="rounded-full transition-transform duration-300 group-hover:scale-105 drop-shadow-md"
-                priority
               />
               <div className="flex flex-col">
-                <span className="font-display text-white text-lg font-semibold tracking-widest uppercase
-                                 transition-opacity duration-200 group-hover:opacity-80
-                                 [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]">
+                <span className={cn(
+                  'font-display text-lg font-semibold tracking-widest uppercase',
+                  'transition-all duration-300 group-hover:opacity-80',
+                  scrolled
+                    ? 'text-lapis-800'
+                    : 'text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]'
+                )}>
                   Ettaarouf
                 </span>
-                <span className="font-body text-gold text-[9px] tracking-[0.22em] uppercase -mt-0.5
-                                 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
+                <span className={cn(
+                  'font-body text-[9px] tracking-[0.22em] uppercase -mt-0.5 transition-all duration-300',
+                  scrolled ? 'text-gold' : 'text-gold [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]'
+                )}>
                   Tourisme &amp; Voyage
                 </span>
               </div>
@@ -110,10 +115,11 @@ export default function Header() {
                     href={link.href}
                     className={cn(
                       'flex items-center gap-1 px-3 py-2 rounded-lg',
-                      'font-body text-sm text-white hover:text-white',
-                      'transition-all duration-200 hover:bg-white/10',
-                      '[text-shadow:0_1px_4px_rgba(0,0,0,0.6)]',
-                      activeMenu === link.label && 'bg-white/10 text-white'
+                      'font-body text-sm transition-all duration-200',
+                      scrolled
+                        ? 'text-lapis-800 hover:text-lapis-600 hover:bg-lapis-50'
+                        : 'text-white hover:text-white hover:bg-white/10 [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]',
+                      activeMenu === link.label && (scrolled ? 'bg-lapis-50' : 'bg-white/10')
                     )}
                   >
                     {link.label}
@@ -154,8 +160,10 @@ export default function Header() {
             {/* ── Actions desktop ───────────────────────────────── */}
             <div className="hidden lg:flex items-center gap-3">
               {/* Langue */}
-              <button className="flex items-center gap-1.5 text-white/70 hover:text-white
-                                  text-sm font-body transition-colors duration-200 px-2 py-1.5">
+              <button className={cn(
+                'flex items-center gap-1.5 text-sm font-body transition-colors duration-200 px-2 py-1.5',
+                scrolled ? 'text-lapis-400 hover:text-lapis-800' : 'text-white/70 hover:text-white'
+              )}>
                 <Globe className="h-4 w-4" />
                 <span>FR</span>
               </button>
@@ -165,7 +173,7 @@ export default function Header() {
                 href="https://wa.me/213XXXXXXXXX"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gold hover:text-gold-light
+                className="flex items-center gap-2 text-gold hover:text-gold-dark
                             text-sm font-body font-medium transition-colors duration-200"
               >
                 <Phone className="h-4 w-4" />
@@ -186,8 +194,10 @@ export default function Header() {
 
             {/* ── Burger mobile ────────────────────────────────── */}
             <button
-              className="lg:hidden text-white p-2 -mr-2 rounded-lg hover:bg-white/10
-                          transition-colors duration-200"
+              className={cn(
+                'lg:hidden p-2 -mr-2 rounded-lg transition-colors duration-200',
+                scrolled ? 'text-lapis-800 hover:bg-lapis-50' : 'text-white hover:bg-white/10'
+              )}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Menu"
             >
