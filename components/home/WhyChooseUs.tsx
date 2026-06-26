@@ -1,6 +1,9 @@
+import type { ElementType } from 'react'
 import { Shield, Award, Headphones, Globe2, Clock, CreditCard } from 'lucide-react'
 
-const REASONS = [
+type AccentKey = 'gold' | 'amber' | 'emerald'
+
+const REASONS: { Icon: ElementType; title: string; description: string; accent: AccentKey }[] = [
   {
     Icon:        Award,
     title:       'Agréé par le Ministère',
